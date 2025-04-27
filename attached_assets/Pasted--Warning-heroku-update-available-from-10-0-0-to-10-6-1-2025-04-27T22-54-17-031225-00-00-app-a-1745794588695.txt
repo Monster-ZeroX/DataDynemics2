@@ -1,0 +1,48 @@
+ »   Warning: heroku update available from 10.0.0 to 10.6.1.
+2025-04-27T22:54:17.031225+00:00 app[api]: Release v1 created by user beemansaminidu@gmail.com
+2025-04-27T22:54:17.031225+00:00 app[api]: Initial release by user beemansaminidu@gmail.com
+2025-04-27T22:54:17.219236+00:00 app[api]: Enable Logplex by user beemansaminidu@gmail.com
+2025-04-27T22:54:17.219236+00:00 app[api]: Release v2 created by user beemansaminidu@gmail.com
+2025-04-27T22:54:38.732697+00:00 app[api]: Release v3 created by user beemansaminidu@gmail.com
+2025-04-27T22:54:38.732697+00:00 app[api]: Set NPM_CONFIG_PRODUCTION config vars by user beemansaminidu@gmail.com
+2025-04-27T22:54:45.766159+00:00 app[api]: Release v4 created by user beemansaminidu@gmail.com
+2025-04-27T22:54:45.766159+00:00 app[api]: Set DATA_DIR config vars by user beemansaminidu@gmail.com
+2025-04-27T22:54:56.000000+00:00 app[api]: Build started by user beemansaminidu@gmail.com
+2025-04-27T22:55:26.889093+00:00 app[api]: Deploy b0f67278 by user beemansaminidu@gmail.com
+2025-04-27T22:55:26.889093+00:00 app[api]: Release v5 created by user beemansaminidu@gmail.com
+2025-04-27T22:55:26.900207+00:00 app[api]: Scaled to web@1:Basic by user beemansaminidu@gmail.com
+2025-04-27T22:55:30.000000+00:00 app[api]: Build succeeded
+2025-04-27T22:55:33.631593+00:00 heroku[web.1]: Starting process with command `node heroku-start.js`
+2025-04-27T22:55:34.161182+00:00 app[web.1]: file:///app/heroku-start.js:6
+2025-04-27T22:55:34.161212+00:00 app[web.1]: const { execSync } = require('child_process');
+2025-04-27T22:55:34.161213+00:00 app[web.1]: ^
+2025-04-27T22:55:34.161213+00:00 app[web.1]:
+2025-04-27T22:55:34.161214+00:00 app[web.1]: ReferenceError: require is not defined in ES module scope, you can use import instead
+2025-04-27T22:55:34.161221+00:00 app[web.1]: This file is being treated as an ES module because it has a '.js' file extension and '/app/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+2025-04-27T22:55:34.161221+00:00 app[web.1]: at file:///app/heroku-start.js:6:22
+2025-04-27T22:55:34.161222+00:00 app[web.1]: at ModuleJob.run (node:internal/modules/esm/module_job:274:25)
+2025-04-27T22:55:34.161222+00:00 app[web.1]: at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+2025-04-27T22:55:34.161222+00:00 app[web.1]: at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-04-27T22:55:34.161226+00:00 app[web.1]:
+2025-04-27T22:55:34.161226+00:00 app[web.1]: Node.js v22.15.0
+2025-04-27T22:55:34.201510+00:00 heroku[web.1]: Process exited with status 1
+2025-04-27T22:55:34.222453+00:00 heroku[web.1]: State changed from starting to crashed
+2025-04-27T22:55:34.225590+00:00 heroku[web.1]: State changed from crashed to starting
+2025-04-27T22:55:40.685151+00:00 heroku[web.1]: Starting process with command `node heroku-start.js`
+2025-04-27T22:55:41.196803+00:00 app[web.1]: file:///app/heroku-start.js:6
+2025-04-27T22:55:41.196832+00:00 app[web.1]: const { execSync } = require('child_process');
+2025-04-27T22:55:41.196833+00:00 app[web.1]: ^
+2025-04-27T22:55:41.196833+00:00 app[web.1]:
+2025-04-27T22:55:41.196834+00:00 app[web.1]: ReferenceError: require is not defined in ES module scope, you can use import instead
+2025-04-27T22:55:41.196840+00:00 app[web.1]: This file is being treated as an ES module because it has a '.js' file extension and '/app/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+2025-04-27T22:55:41.196840+00:00 app[web.1]: at file:///app/heroku-start.js:6:22
+2025-04-27T22:55:41.196841+00:00 app[web.1]: at ModuleJob.run (node:internal/modules/esm/module_job:274:25)
+2025-04-27T22:55:41.196841+00:00 app[web.1]: at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+2025-04-27T22:55:41.196841+00:00 app[web.1]: at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-04-27T22:55:41.196842+00:00 app[web.1]:
+2025-04-27T22:55:41.196842+00:00 app[web.1]: Node.js v22.15.0
+2025-04-27T22:55:41.237620+00:00 heroku[web.1]: Process exited with status 1
+2025-04-27T22:55:41.263286+00:00 heroku[web.1]: State changed from starting to crashed
+2025-04-27T22:55:55.247917+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=floating-reef-92063-1eda826781ea.herokuapp.com request_id=b55444b9-294a-4d8c-9b19-342adcb76753 fwd="18.142.135.68" dyno= connect= service= status=503 bytes= protocol=https
+2025-04-27T22:55:57.362676+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=floating-reef-92063-1eda826781ea.herokuapp.com request_id=5bb1501e-564f-4618-ae4b-953040e64b58 fwd="18.142.135.68" dyno= connect= service= status=503 bytes= protocol=https
+

@@ -13,7 +13,7 @@ copy attached_assets\*.jsonl dist\data\
 REM Create Heroku specific files if they don't exist
 if not exist Procfile (
   echo Creating Procfile...
-  echo web: npm start > Procfile
+  echo web: node heroku-server.cjs > Procfile
 )
 
 if not exist .node-version (

@@ -14,7 +14,7 @@ cp attached_assets/*.jsonl dist/data/ 2>/dev/null || :
 # Create Heroku specific files if they don't exist
 if [ ! -f Procfile ]; then
   echo "Creating Procfile..."
-  echo "web: node heroku-server.js" > Procfile
+  echo "web: node heroku-server.cjs" > Procfile
 fi
 
 if [ ! -f .node-version ]; then
