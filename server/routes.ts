@@ -18,54 +18,70 @@ interface Student {
 }
 
 async function loadJsonlFiles() {
-  const dataDir = path.join(process.cwd(), "attached_assets");
+  // Try to load from multiple possible locations for flexibility
+  const possibleDataDirs = [
+    path.join(process.cwd(), "attached_assets"),
+    path.join(process.cwd(), "data"),
+    path.join(process.cwd(), "dist", "data")
+  ];
   
-  try {
-    // Check if the data directory exists
-    if (!fs.existsSync(dataDir)) {
-      log(`Data directory not found: ${dataDir}`, "warning");
-      return [];
-    }
-    
-    // Get all JSONL files in the directory
-    const files = fs.readdirSync(dataDir).filter(file => file.endsWith(".jsonl"));
-    
-    if (files.length === 0) {
-      log("No JSONL files found in the data directory", "warning");
-      return [];
-    }
-    
-    let students: Student[] = [];
-    
-    // Process each JSONL file
-    for (const file of files) {
-      const filePath = path.join(dataDir, file);
-      log(`Loading data from ${filePath}`);
+  let students: Student[] = [];
+  
+  for (const dataDir of possibleDataDirs) {
+    try {
+      // Check if the data directory exists
+      if (!fs.existsSync(dataDir)) {
+        log(`Data directory not found: ${dataDir}`, "warning");
+        continue;
+      }
       
-      const fileStream = fs.createReadStream(filePath);
-      const rl = readline.createInterface({
-        input: fileStream,
-        crlfDelay: Infinity
-      });
+      // Get all JSONL files in the directory
+      const files = fs.readdirSync(dataDir).filter(file => file.endsWith(".jsonl"));
       
-      for await (const line of rl) {
-        try {
-          if (line.trim()) {
-            const student = JSON.parse(line);
-            students.push(student);
+      if (files.length === 0) {
+        log(`No JSONL files found in ${dataDir}`, "warning");
+        continue;
+      }
+      
+      // Process each JSONL file
+      for (const file of files) {
+        const filePath = path.join(dataDir, file);
+        log(`Loading data from ${filePath}`);
+        
+        const fileStream = fs.createReadStream(filePath);
+        const rl = readline.createInterface({
+          input: fileStream,
+          crlfDelay: Infinity
+        });
+        
+        for await (const line of rl) {
+          try {
+            if (line.trim()) {
+              const student = JSON.parse(line);
+              students.push(student);
+            }
+          } catch (err) {
+            log(`Error parsing line in ${file}: ${err}`, "error");
           }
-        } catch (err) {
-          log(`Error parsing line in ${file}: ${err}`, "error");
         }
       }
+      
+      // If we've successfully loaded data, no need to check other directories
+      if (students.length > 0) {
+        break;
+      }
+    } catch (error) {
+      log(`Error loading JSONL files from ${dataDir}: ${error}`, "error");
     }
-    
-    log(`Loaded ${students.length} student records`);
-    return students;
-  } catch (error) {
-    log(`Error loading JSONL files: ${error}`, "error");
-    return [];
   }
+  
+  if (students.length === 0) {
+    log("Could not load any student data from any location", "error");
+  } else {
+    log(`Loaded ${students.length} student records`);
+  }
+  
+  return students;
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
