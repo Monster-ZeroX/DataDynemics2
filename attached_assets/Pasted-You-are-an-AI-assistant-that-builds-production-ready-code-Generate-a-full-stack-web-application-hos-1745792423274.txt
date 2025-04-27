@@ -1,0 +1,74 @@
+You are an AI assistant that builds production-ready code. Generate a full-stack web application hosted on both Replit and Heroku that meets the following requirements:
+
+1. Tech Stack
+   - **Backend**: Node.js + Express
+   - **Frontend**: React (Vite or Create-React-App)
+   - **Styling**: Tailwind CSS
+   - **Data store**: Read & index multiple JSON-Lines files (`*.jsonl`) from disk into memory at startup
+
+2. Core Features
+   - **Global search bar**: Positioned prominently at the top. Users can type any partial or full student name (case-insensitive).
+   - **Search behavior**: Perform substring matches on the "Name" field across all loaded records. E.g., typing "Amal" shows every record where "Amal" appears anywhere in the full name.
+   - **Live results list**: As the user types, display up to 20 matching full names in a scrollable dropdown.
+   - **Detail modal/page**: When a name is clicked or selected by keyboard and Enter, display that student’s full record in a modal or dedicated view: index number, Z-score, district rank, island rank, NIC, and a nicely formatted table of subjects + grades.
+   - **No matches**: If no records match, show a friendly "No students found" message.
+
+3. UI/UX Guidelines
+   - **Responsive design**: Works seamlessly on desktop and mobile.
+   - **Minimalist & modern**: Centered search input with a subtle shadow, rounded dropdown items with hover/focus states, clear typography and spacing.
+   - **Accessibility**: Use semantic HTML, add `aria` attributes for the dropdown, label the search input, support keyboard navigation (arrow keys to move through suggestions, Enter to select).
+
+4. Project Structure
+```
+/                # root
+├─ server.js     # Express server: loads JSONL, exposes `/api/search?q=...`
+├─ package.json  # dependencies & scripts (dev, start)
+├─ Procfile      # for Heroku deployment
+├─ /.replit      # Replit config file pointing run command to `npm start`
+├─ /data         # place all your `.jsonl` files here
+├─ /client       # front-end app
+│   ├─ vite.config.js or CRA files
+│   ├─ tailwind.config.js
+│   ├─ postcss.config.js
+│   └─ /src
+│       ├─ index.jsx or index.js
+│       ├─ App.jsx
+│       └─ /components
+│           ├─ SearchBar.jsx
+│           ├─ SuggestionsList.jsx
+│           └─ StudentDetail.jsx
+└─ README.md     # setup, Replit & Heroku deployment instructions
+```
+
+5. API Contract
+   - **GET /api/search?q=term** → returns JSON array of matching records (full objects).
+   - Responses should include `CORS` headers so the React app can fetch without proxies.
+
+6. Replit Deployment
+   - Include a `.replit` file that runs `npm install && npm start`.
+   - Explain how to upload `.jsonl` files into `/data`.
+
+7. Heroku Deployment
+   - **Procfile**: Add at root:
+     ```
+     web: node server.js
+     ```
+   - **Start script**: In `package.json`, ensure:
+     ```json
+     "scripts": {
+       "start": "node server.js",
+       "dev": "nodemon server.js"
+     }
+     ```
+   - **README.md**: Provide step-by-step:
+     1. `heroku login`
+     2. `heroku create your-app-name`
+     3. `git init`; commit all files including `/data` folder
+     4. `git push heroku main` (or `master`)
+     5. `heroku ps:scale web=1`
+     6. `heroku open`
+   - **Config vars**: If any environment variables are needed, set them via `heroku config:set KEY=value`.
+   - No external database—static JSON files only.
+
+Produce all files (`server.js`, React source, config files, `Procfile`, `.replit`, `README.md`) fully fleshed out with comments. Make the code clean, well-structured, and ready to deploy on both Replit and Heroku.
+
