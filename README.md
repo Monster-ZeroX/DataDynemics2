@@ -41,56 +41,78 @@ A full-stack web application for searching and viewing student examination resul
    heroku login
    ```
 
-### Deployment Steps
+### Windows Deployment Steps
 
 1. Run the preparation script:
-   ```bash
-   ./prepare-heroku.sh
+   ```cmd
+   prepare-heroku.bat
    ```
 
 2. Initialize a Git repository (if not already done):
-   ```bash
+   ```cmd
    git init
    git add .
    git commit -m "Initial commit"
    ```
 
 3. Create a new Heroku app:
-   ```bash
+   ```cmd
    heroku create
    ```
 
-4. Deploy to Heroku:
-   ```bash
-   git push heroku main
+4. Set the Node.js buildpack:
+   ```cmd
+   heroku buildpacks:set heroku/nodejs
+   ```
+   
+5. Tell Heroku to install all dependencies (including dev dependencies):
+   ```cmd
+   heroku config:set NPM_CONFIG_PRODUCTION=false
    ```
 
-5. Open your app:
-   ```bash
+6. Add the environment variable to specify where to find data:
+   ```cmd
+   heroku config:set DATA_DIR=data
+   ```
+
+7. Deploy to Heroku:
+   ```cmd
+   git push heroku main
+   ```
+   Note: If your branch is named 'master', use:
+   ```cmd
+   git push heroku master
+   ```
+
+8. Open your app:
+   ```cmd
    heroku open
    ```
 
-### Manual Deployment Steps
+### Troubleshooting Heroku Deployment
 
-If you prefer to do the deployment steps manually:
+If you encounter issues during deployment:
 
-1. Ensure you've created the necessary files:
-   - `Procfile` with content: `web: npm start`
-   - `.node-version` with content: `20.x`
-
-2. Build your application:
-   ```bash
-   npm run build
+1. Check the Heroku logs:
+   ```cmd
+   heroku logs --tail
    ```
 
-3. Create a new Heroku app:
-   ```bash
-   heroku create
-   ```
-
-4. Deploy to Heroku:
-   ```bash
+2. If you see errors related to missing dependencies:
+   ```cmd
+   heroku config:set NPM_CONFIG_PRODUCTION=false
+   git commit --allow-empty -m "Trigger rebuild"
    git push heroku main
+   ```
+
+3. If the application crashes on startup, try restarting it:
+   ```cmd
+   heroku restart
+   ```
+
+4. Make sure you've correctly copied the data files:
+   ```cmd
+   heroku run ls -la data
    ```
 
 ## Structure

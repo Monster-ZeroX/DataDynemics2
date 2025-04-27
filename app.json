@@ -1,0 +1,23 @@
+{
+  "name": "Student Results Explorer",
+  "description": "A web application for searching and viewing student examination results from JSONL data files",
+  "keywords": ["node", "express", "react", "typescript"],
+  "website": "https://github.com/yourusername/student-results-explorer",
+  "repository": "https://github.com/yourusername/student-results-explorer",
+  "success_url": "/",
+  "env": {
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "Set to false to ensure dev dependencies are installed",
+      "value": "false"
+    },
+    "DATA_DIR": {
+      "description": "Directory where data files are stored",
+      "value": "data"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
