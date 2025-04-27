@@ -41,7 +41,13 @@ A full-stack web application for searching and viewing student examination resul
    heroku login
    ```
 
-### Windows Deployment Steps
+### Heroku One-Click Deployment
+
+The simplest way to deploy this application to Heroku is by clicking the button below:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+### Windows Manual Deployment Steps
 
 1. Run the preparation script:
    ```cmd
@@ -86,6 +92,50 @@ A full-stack web application for searching and viewing student examination resul
 
 8. Open your app:
    ```cmd
+   heroku open
+   ```
+
+### Linux/Mac Deployment Steps
+
+1. Run the preparation script:
+   ```bash
+   bash prepare-heroku.sh
+   ```
+
+2. Initialize a Git repository (if not already done):
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   ```
+
+3. Create a new Heroku app:
+   ```bash
+   heroku create
+   ```
+
+4. Set the Node.js buildpack:
+   ```bash
+   heroku buildpacks:set heroku/nodejs
+   ```
+   
+5. Tell Heroku to install all dependencies (including dev dependencies):
+   ```bash
+   heroku config:set NPM_CONFIG_PRODUCTION=false
+   ```
+
+6. Add the environment variable to specify where to find data:
+   ```bash
+   heroku config:set DATA_DIR=data
+   ```
+
+7. Deploy to Heroku:
+   ```bash
+   git push heroku main
+   ```
+
+8. Open your app:
+   ```bash
    heroku open
    ```
 

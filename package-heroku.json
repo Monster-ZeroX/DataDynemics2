@@ -1,0 +1,23 @@
+{
+  "name": "student-results-explorer",
+  "version": "1.0.0",
+  "description": "Web application for searching and viewing student examination results",
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "start": "node heroku-server.js",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "vite build",
+    "build:server": "tsc -p tsconfig.server.json",
+    "heroku-postbuild": "node heroku-postbuild.js"
+  },
+  "cacheDirectories": [
+    "node_modules"
+  ],
+  "dependencies": {
+    "@vitejs/plugin-react": "*",
+    "vite": "*",
+    "esbuild": "*"
+  }
+}
