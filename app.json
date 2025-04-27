@@ -13,11 +13,24 @@
     "DATA_DIR": {
       "description": "Directory where data files are stored",
       "value": "data"
+    },
+    "NODE_OPTIONS": {
+      "description": "Node.js options for the application",
+      "value": "--no-warnings --experimental-specifier-resolution=node"
     }
   },
   "buildpacks": [
     {
       "url": "heroku/nodejs"
     }
-  ]
+  ],
+  "scripts": {
+    "postdeploy": "node heroku-build.cjs"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  }
 }

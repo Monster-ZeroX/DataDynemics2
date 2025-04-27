@@ -10,7 +10,7 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build",
     "build:server": "tsc -p tsconfig.server.json",
-    "heroku-postbuild": "node heroku-postbuild.js"
+    "heroku-postbuild": "node heroku-postbuild.cjs"
   },
   "cacheDirectories": [
     "node_modules"

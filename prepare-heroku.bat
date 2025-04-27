@@ -7,8 +7,14 @@ mkdir dist\data 2>nul
 
 REM Copy JSONL data files to the data directories
 echo Copying JSONL data files...
-copy attached_assets\*.jsonl data\
-copy attached_assets\*.jsonl dist\data\
+copy attached_assets\*.jsonl data\ 2>nul
+copy attached_assets\*.jsonl dist\data\ 2>nul
+
+REM Create and copy CJS versions of the server scripts
+echo Creating CommonJS versions of server scripts...
+copy heroku-server.js heroku-server.cjs 2>nul
+copy heroku-postbuild.js heroku-postbuild.cjs 2>nul
+copy heroku-build.js heroku-build.cjs 2>nul
 
 REM Create Heroku specific files if they don't exist
 if not exist Procfile (
