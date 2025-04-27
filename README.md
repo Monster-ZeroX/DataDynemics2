@@ -155,14 +155,31 @@ If you encounter issues during deployment:
    git push heroku main
    ```
 
-3. If the application crashes on startup, try restarting it:
+3. If you encounter module system compatibility issues (ESM vs CommonJS):
+   ```cmd
+   # Add NODE_OPTIONS to help resolve module issues
+   heroku config:set NODE_OPTIONS="--no-warnings --experimental-specifier-resolution=node"
+   git commit --allow-empty -m "Update Node options"
+   git push heroku main
+   ```
+
+4. If the application crashes on startup, try restarting it:
    ```cmd
    heroku restart
    ```
 
-4. Make sure you've correctly copied the data files:
+5. Make sure you've correctly copied the data files:
    ```cmd
    heroku run ls -la data
+   ```
+
+6. To test your production environment locally before deploying:
+   ```bash
+   # On Linux/Mac
+   bash test-production.sh
+   
+   # On Windows
+   node heroku-build.cjs
    ```
 
 ## Structure
@@ -171,3 +188,19 @@ If you encounter issues during deployment:
 - `/server` - Backend Express API
 - `/shared` - Shared TypeScript types and schemas
 - `/data` - JSONL data files for student records
+
+## Heroku Deployment Files
+
+The following files are specifically created for Heroku deployment:
+
+- `Procfile` - Instructs Heroku how to start the application
+- `.npmrc` - NPM configuration file to include dev dependencies
+- `heroku-server.cjs` - CommonJS version of the server startup script
+- `heroku-build.cjs` - Script for building the application on Heroku
+- `heroku-postbuild.cjs` - Post-build steps for Heroku deployments
+- `prepare-heroku.sh` - Script to prepare the application for deployment on Linux/Mac
+- `prepare-heroku.bat` - Script to prepare the application for deployment on Windows
+- `test-production.sh` - Test script to validate production environment locally
+- `app.json` - Configuration for Heroku one-click deployments
+
+These files handle the necessary conversions between ES Modules and CommonJS to ensure compatibility with the Heroku environment. The preparation scripts ensure that all required files are in the correct locations before deployment.

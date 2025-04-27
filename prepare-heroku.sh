@@ -11,6 +11,15 @@ echo "Copying JSONL data files..."
 cp attached_assets/*.jsonl data/ 2>/dev/null || :
 cp attached_assets/*.jsonl dist/data/ 2>/dev/null || :
 
+# Create and copy CJS versions of the server scripts
+echo "Creating CommonJS versions of server scripts..."
+cp heroku-server.js heroku-server.cjs 2>/dev/null || :
+cp heroku-postbuild.js heroku-postbuild.cjs 2>/dev/null || :
+cp heroku-build.js heroku-build.cjs 2>/dev/null || :
+
+# Make scripts executable
+chmod +x heroku-*.cjs 2>/dev/null || :
+
 # Create Heroku specific files if they don't exist
 if [ ! -f Procfile ]; then
   echo "Creating Procfile..."
